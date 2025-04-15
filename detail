@@ -1,0 +1,17 @@
+mover mover1
+loader loader1
+
+predicate   ready
+function    distance, weight
+action      move
+
+
+example plan:
+
+mover1 move to loc x
+mover1 load 
+mover1 move to loc 0
+
+mover1 unload/loader1 load
+
+mover1 move to loc x2
