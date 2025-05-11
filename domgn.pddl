@@ -20,6 +20,7 @@
     )
 
     (:functions
+        (x)
         (velocity ?m - mover)
         (max_vel ?m - mover)
         (at-robby ?m - mover)
@@ -132,13 +133,11 @@
             (not (currentgroupset)) (= (belong ?b) 0) (= (currentgroup) 0)
         )
         :effect (and
-            
-                (assign (velocity ?m1) (/ (* (position ?b) (weight ?b)) 150))
-                (assign (velocity ?m2) (/ (* (position ?b) (weight ?b)) 150))            
+                (when (<= (weight ?b) 50) (assign (x) 150))
+                (assign (velocity ?m1) (/ (* (position ?b) (weight ?b)) x))
+                (assign (velocity ?m2) (/ (* (position ?b) (weight ?b)) x))            
                 (moving ?m1) (not (topositive ?m1)) (carry ?b ?m1) (not (free ?m1))
                 (moving ?m2) (not (topositive ?m2)) (carry ?b ?m2) (not (free ?m2))
-         
-            
         )
     )
     (:action pickup_by_two_per_gruppo
@@ -155,8 +154,9 @@
             (or (not (currentgroupset)) (= (belong ?b) (currentgroup)))
         )
         :effect (and
-            (assign (velocity ?m1) (/ (* (position ?b) (weight ?b)) 150))
-            (assign (velocity ?m2) (/ (* (position ?b) (weight ?b)) 150))             
+            (when (<= (weight ?b) 50) (assign (x) 150))
+            (assign (velocity ?m1) (/ (* (position ?b) (weight ?b)) x))
+            (assign (velocity ?m2) (/ (* (position ?b) (weight ?b)) x))             
             (moving ?m1) (not (topositive ?m1)) (carry ?b ?m1) (not (free ?m1))
             (moving ?m2) (not (topositive ?m2)) (carry ?b ?m2) (not (free ?m2))
             (assign (currentgroup) (belong ?b)) 
@@ -217,6 +217,7 @@
             (assign (at-robby ?m1) 0) (assign (at-robby ?m2) 0) (assign (position ?b) 0)
             (assign (velocity ?m1) (max_vel ?m1))
             (assign (velocity ?m2) (max_vel ?m2))
+            (assign (x) 100)
         )
     )
     (:process load
