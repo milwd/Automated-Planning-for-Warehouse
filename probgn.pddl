@@ -85,7 +85,7 @@
         (= (belong ball7) 1)
         (= (belong ball8) 0)
         (= (belong ball9) 1)
-
+        (= (x) 100)
         (group A)
         (group B)
         (group C)
