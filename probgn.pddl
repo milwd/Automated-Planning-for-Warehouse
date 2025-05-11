@@ -21,7 +21,7 @@
         (not (moving mover2))
         (= (battery mover1) 20)
         (= (battery mover2) 20)
-        (= (maxchargebattery) 20)
+        (= (maxbattery) 200)
         
         (= (max_vel mover1) 10)
         (= (max_vel mover2) 10)
@@ -57,7 +57,7 @@
         (= (position ball6) 70)
         (= (position ball7) 80)
         (= (position ball8) 90)
-        (= (position ball9) 500)
+        (= (position ball9) 100)
         (= (weight ball1) 7)
         (= (weight ball2) 3)
         (= (weight ball3) 2)
