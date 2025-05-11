@@ -2,7 +2,7 @@
 ; == CONTINUOUS WITH LOADER TIME ===============================================
 
 (define (domain gripper-continuous)
-    ; (:requirements :typing :strips :fluents :processes :events)
+    ; (:requirements :conditional-effects :typing :strips :fluents :processes :events)
 
     (:types mover loader ball group)
 
@@ -31,7 +31,7 @@
         (numofgroup ?g - group)
         (elementspergroup ?g - group)
         (battery ?m - mover)
-        (maxchargebattery)
+        (maxbattery)
     )
 
     (:process drain_battery
@@ -45,10 +45,10 @@
     (:event charging_battery
         :parameters (?m - mover)
         :precondition (and
-            (not(moving ?m))(=(at-robby ?m)0) (< (battery ?m)  (maxchargebattery))(free ?m)
+            (not(moving ?m))(=(at-robby ?m)0) (< (battery ?m) (maxbattery))(free ?m)
         )
         :effect (and
-            (assign (battery ?m)  (maxchargebattery))
+            (assign (battery ?m)  (maxbattery))
         )
     )    
     
@@ -84,12 +84,14 @@
         :precondition (and (= (elementspergroup ?g) 0) (= (numofgroup ?g) (currentgroup)) (currentgroupset))
         :effect (and (not (currentgroupset)))
     )
+    
     ; for picking up stray balls
     (:action pickup
         :parameters (?m - mover ?b - ball )
         :precondition (and
             (not (moving ?m)) (topositive ?m) (= (at-robby ?m) (position ?b)) (not (isloaded ?b)) (> (position ?b) 0) (<= (weight ?b) 50) (not (isfragile ?b)) (free ?m)
-            (not (currentgroupset)) (= (belong ?b) 0) (= (currentgroup) 0) (> (battery ?m) 0)
+            (not (currentgroupset)) (= (belong ?b) 0) (= (currentgroup) 0)
+            (> (battery ?m) 0)
         )
         :effect (and
             (moving ?m) (not (topositive ?m)) (carry ?b ?m) (not (free ?m))
@@ -100,12 +102,10 @@
     (:action pickup_per_gruppo
         :parameters (?m - mover ?b - ball ?g - group)
         :precondition (and
+            (> (battery ?m) 0)
             (not (moving ?m)) (topositive ?m) (= (at-robby ?m) (position ?b)) (not (isloaded ?b)) (> (position ?b) 0) (<= (weight ?b) 50) (not (isfragile ?b)) (free ?m)
-            (= (belong ?b) (numofgroup ?g)) (> (belong ?b) 0) (> (battery ?m) 0)
-            (or 
-                (not (currentgroupset))
-                (and (= (belong ?b) (currentgroup)) (> (currentgroup) 0) (currentgroupset))
-            )
+            (= (belong ?b) (numofgroup ?g)) (> (belong ?b) 0)
+            (or (not (currentgroupset)) (= (belong ?b) (currentgroup)) )
         )
         :effect (and
             (assign (currentgroup) (belong ?b)) 
@@ -118,59 +118,47 @@
             (assign (velocity ?m) (/ (* (position ?b) (weight ?b)) 100))
         )
     )
-
-    ; (:event doneload
-    ;     :parameters (?b - ball ?m - mover)
-    ;     :precondition (and 
-    ;         (carry ?b ?m) (not (free ?m))
-    ;     )
-    ;     :effect (and (isloaded ?b) (not (carry ?b ?m)) (free ?m) 
-    ;         (assign (at-robby ?m) 0)
-    ;         (assign (position ?b) 0)
-    ;         (not (moving ?m))
-    ;         (topositive ?m)
-    ;     )
-    ; )
-    
     
     (:action pickup_by_two
         :parameters (?m1 - mover ?m2 - mover ?b - ball)
         :precondition (and
+            (> (battery ?m1) 0)
+            (> (battery ?m2) 0)
             (not (equal ?m1 ?m2)) (free ?m1) (free ?m2)
             (not (moving ?m1)) (topositive ?m1) (= (at-robby ?m1) (position ?b))
             (not (moving ?m2)) (topositive ?m2) (= (at-robby ?m2) (position ?b)) 
             (not (isloaded ?b)) (> (position ?b) 0)
-            (> (battery ?m1) 0) (> (battery ?m2) 0)
 
             (not (currentgroupset)) (= (belong ?b) 0) (= (currentgroup) 0)
         )
         :effect (and
-            (moving ?m1) (not (topositive ?m1)) (carry ?b ?m1) (not (free ?m1))
-            (moving ?m2) (not (topositive ?m2)) (carry ?b ?m2) (not (free ?m2))
-            (assign (velocity ?m1) (/ (* (position ?b) (weight ?b)) 150))
-            (assign (velocity ?m2) (/ (* (position ?b) (weight ?b)) 150))
+            
+                (assign (velocity ?m1) (/ (* (position ?b) (weight ?b)) 150))
+                (assign (velocity ?m2) (/ (* (position ?b) (weight ?b)) 150))            
+                (moving ?m1) (not (topositive ?m1)) (carry ?b ?m1) (not (free ?m1))
+                (moving ?m2) (not (topositive ?m2)) (carry ?b ?m2) (not (free ?m2))
+         
+            
         )
     )
     (:action pickup_by_two_per_gruppo
         :parameters (?m1 - mover ?m2 - mover ?b - ball ?g - group)
         :precondition (and
+            (> (battery ?m1) 0)
+            (> (battery ?m2) 0)
             (not (equal ?m1 ?m2)) (free ?m1) (free ?m2)
             (not (moving ?m1)) (topositive ?m1) (= (at-robby ?m1) (position ?b))
             (not (moving ?m2)) (topositive ?m2) (= (at-robby ?m2) (position ?b)) 
             (not (isloaded ?b)) (> (position ?b) 0)
-            (> (battery ?m1) 0) (> (battery ?m2) 0)
 
-            (= (belong ?b) (numofgroup ?g)) (> (belong ?b) 0)
-            (or 
-                (not (currentgroupset))
-                (and (= (belong ?b) (currentgroup)) (> (currentgroup) 0) (currentgroupset))
-            )
+            (= (belong ?b) (numofgroup ?g)) (> (belong ?b) 0) 
+            (or (not (currentgroupset)) (= (belong ?b) (currentgroup)))
         )
         :effect (and
+            (assign (velocity ?m1) (/ (* (position ?b) (weight ?b)) 150))
+            (assign (velocity ?m2) (/ (* (position ?b) (weight ?b)) 150))             
             (moving ?m1) (not (topositive ?m1)) (carry ?b ?m1) (not (free ?m1))
             (moving ?m2) (not (topositive ?m2)) (carry ?b ?m2) (not (free ?m2))
-            (assign (velocity ?m1) (/ (* (position ?b) (weight ?b)) 150))
-            (assign (velocity ?m2) (/ (* (position ?b) (weight ?b)) 150))
             (assign (currentgroup) (belong ?b)) 
             (currentgroupset) 
             (decrease (elementspergroup ?g) 1) 
@@ -179,8 +167,8 @@
     (:process backto_loader
         :parameters (?m - mover ?b - ball)
         :precondition (and
-            (moving ?m) (not (topositive ?m)) (carry ?b ?m) (> (at-robby ?m) 0) (>(position ?b)0)(<= (weight ?b) 50) (not (isfragile ?b))
-        )
+            (moving ?m) (not (topositive ?m)) (carry ?b ?m) (> (at-robby ?m) 0) (>(position ?b)0)(<= (weight ?b) 50) (not (isfragile ?b))(> (battery ?m) 0) (not (free ?m))
+            )
         :effect (and
             (decrease (at-robby ?m) (* #t (velocity ?m))) (decrease (position ?b) (* #t (velocity ?m)))
         )
@@ -188,10 +176,14 @@
     (:process backto_loader_by_two
         :parameters (?m1 - mover ?m2 - mover ?b - ball)
         :precondition (and
+            (> (battery ?m1) 0)
+            (> (battery ?m2) 0)
             (not (equal ?m1 ?m2))
             (moving ?m1) (not (topositive ?m1)) (carry ?b ?m1) (> (at-robby ?m1) 0) 
             (moving ?m2) (not (topositive ?m2)) (carry ?b ?m2) (> (at-robby ?m2) 0)
             (> (position ?b) 0)
+            (not (free ?m1))
+            (not (free ?m2))
         )
         :effect (and
             (decrease (at-robby ?m1) (* #t (velocity ?m1))) (decrease (at-robby ?m2) (* #t (velocity ?m2)))
