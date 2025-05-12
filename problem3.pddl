@@ -5,21 +5,31 @@
         mover1 mover2 - mover
         ball1 ball2 ball3 ball4 - ball
         loader1 loader2 - loader
+        A - group
     )
 
     (:init
-        (= (velocity) 1)
-
         (mover mover1)
         (mover mover2)
         (free mover1)
         (free mover2)
         (equal mover1 mover1)
-        (equal mover2 mover2)        
+        (equal mover2 mover2)
         (= (at-robby mover1) 0)  
         (= (at-robby mover2) 0)  
         (not (moving mover1))
         (not (moving mover2))
+        (= (battery mover1) 20)
+        (= (battery mover2) 20)
+        (= (maxbattery) 20)
+        
+        (= (max_vel mover1) 10)
+        (= (max_vel mover2) 10)
+        
+        (= (velocity mover1) 10)
+        (= (velocity mover2) 10)
+        
+        ; (= (batterytimer) 0)
         
         (ball ball1)
         (ball ball2)
@@ -29,6 +39,10 @@
         (not (isloaded ball2))
         (not (isloaded ball3))
         (not (isloaded ball4))
+        (at_company ball1)
+        (at_company ball2)
+        (at_company ball3)
+        (at_company ball4)
         (= (position ball1) 20)
         (= (position ball2) 20)
         (= (position ball3) 30)
@@ -37,7 +51,22 @@
         (= (weight ball2) 80)
         (= (weight ball3) 60)
         (= (weight ball4) 30)
-        
+        (not (isfragile ball1))
+        (not (isfragile ball2))
+        (not (isfragile ball3))
+        (not (isfragile ball4))
+        (= (belong ball1) 1)
+        (= (belong ball2) 1)
+        (= (belong ball3) 1)
+        (= (belong ball4) 0)
+        (= (x) 100)
+        (group A)
+        (= (numofgroup A) 1)
+        (= (elementspergroup A) 3)
+
+        (not (currentgroupset))
+        (= (currentgroup) 0)
+
         (loader loader1)
         (= (loadertimer loader1) 0)
         (not (busyloading loader1)) 
@@ -46,6 +75,9 @@
         (not (busyloading loader2)) 
         (not (ischeap loader2))
         (not (ischeap loader1))
+        (freeloader loader1)
+        (freeloader loader2)
+
     )
 
     (:goal
