@@ -1,6 +1,3 @@
-
-; == CONTINUOUS WITH LOADER TIME ===============================================
-
 (define (domain gripper-continuous)
     ; (:requirements :conditional-effects :typing :strips :fluents :processes :events)
 
@@ -19,6 +16,7 @@
         (currentgroupset)
         (freeloader ?l - loader)
         (at_company ?b - ball)
+        (coeff_set)
     )
 
     (:functions
@@ -140,17 +138,14 @@
             (not (moving ?m1)) (topositive ?m1) (= (at-robby ?m1) (position ?b))
             (not (moving ?m2)) (topositive ?m2) (= (at-robby ?m2) (position ?b)) 
             (not (isloaded ?b)) (> (position ?b) 0)
-
             (not (currentgroupset)) (= (belong ?b) 0) (= (currentgroup) 0)
-            (at_company ?b)
+            (at_company ?b)(not (coeff_set))
         )
-        :effect (and
-            ; (when (<= (weight ?b) 50) (assign (x) 150))
-            (assign (velocity ?m1) (/ (* (position ?b) (weight ?b)) x))
-            (assign (velocity ?m2) (/ (* (position ?b) (weight ?b)) x))            
+        :effect (and        
             (moving ?m1) (not (topositive ?m1)) (carry ?b ?m1) (not (free ?m1))
             (moving ?m2) (not (topositive ?m2)) (carry ?b ?m2) (not (free ?m2))
             (not (at_company ?b))
+            (coeff_set)
         )
     )
     (:action pickup_by_two_per_gruppo
@@ -162,23 +157,43 @@
             (not (moving ?m1)) (topositive ?m1) (= (at-robby ?m1) (position ?b))
             (not (moving ?m2)) (topositive ?m2) (= (at-robby ?m2) (position ?b)) 
             (not (isloaded ?b)) (> (position ?b) 0)
-
             (= (belong ?b) (numofgroup ?g)) (> (belong ?b) 0) 
             (or (not (currentgroupset)) (= (belong ?b) (currentgroup)))
-            (at_company ?b)
+            (at_company ?b) 
+            (not (coeff_set))
         )
-        :effect (and
-            ; (when (<= (weight ?b) 50) (assign (x) 150))
-            (assign (velocity ?m1) (/ (* (position ?b) (weight ?b)) x))
-            (assign (velocity ?m2) (/ (* (position ?b) (weight ?b)) x))             
+        :effect (and        
             (moving ?m1) (not (topositive ?m1)) (carry ?b ?m1) (not (free ?m1))
             (moving ?m2) (not (topositive ?m2)) (carry ?b ?m2) (not (free ?m2))
             (assign (currentgroup) (belong ?b)) 
             (currentgroupset) 
             (decrease (elementspergroup ?g) 1) 
             (not (at_company ?b))
+            (coeff_set)
+
         )
     )
+
+    (:event coeff_changer_light
+        :parameters(?m1 - mover ?m2 - mover ?b - ball)
+        :precondition (and (coeff_set) (carry ?b ?m1) (carry ?b ?m2) (not (equal ?m1 ?m2)) (< (weight ?b) 50))
+        :effect(and
+            (assign (velocity ?m1) (/ (* (position ?b) (weight ?b)) 150))
+            (assign (velocity ?m2) (/ (* (position ?b) (weight ?b)) 150))
+            (not(coeff_set))
+        )
+    )
+
+    (:event coeff_changer_heavy
+        :parameters(?m1 - mover ?m2 - mover ?b - ball)
+        :precondition (and (coeff_set) (carry ?b ?m1) (carry ?b ?m2) (not (equal ?m1 ?m2)) (>= (weight ?b) 50))
+        :effect(and
+            (assign (velocity ?m1) (/ (* (position ?b) (weight ?b)) 100))
+            (assign (velocity ?m2) (/ (* (position ?b) (weight ?b)) 100))
+            (not(coeff_set))
+        )
+    )
+
     (:process backto_loader
         :parameters (?m - mover ?b - ball)
         :precondition (and
@@ -230,7 +245,7 @@
             (assign (at-robby ?m1) 0) (assign (at-robby ?m2) 0) (assign (position ?b) 0)
             (assign (velocity ?m1) (max_vel ?m1))
             (assign (velocity ?m2) (max_vel ?m2))
-            (assign (x) 100)
+            ; (assign (x) 100)
             (not (freeloader ?l))
 
         )
