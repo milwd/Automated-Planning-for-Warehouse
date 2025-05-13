@@ -145,7 +145,7 @@
             (at_company ?b)
         )
         :effect (and
-            (when (<= (weight ?b) 50) (assign (x) 150))
+            ; (when (<= (weight ?b) 50) (assign (x) 150))
             (assign (velocity ?m1) (/ (* (position ?b) (weight ?b)) x))
             (assign (velocity ?m2) (/ (* (position ?b) (weight ?b)) x))            
             (moving ?m1) (not (topositive ?m1)) (carry ?b ?m1) (not (free ?m1))
@@ -168,7 +168,7 @@
             (at_company ?b)
         )
         :effect (and
-            (when (<= (weight ?b) 50) (assign (x) 150))
+            ; (when (<= (weight ?b) 50) (assign (x) 150))
             (assign (velocity ?m1) (/ (* (position ?b) (weight ?b)) x))
             (assign (velocity ?m2) (/ (* (position ?b) (weight ?b)) x))             
             (moving ?m1) (not (topositive ?m1)) (carry ?b ?m1) (not (free ?m1))
@@ -182,34 +182,22 @@
     (:process backto_loader
         :parameters (?m - mover ?b - ball)
         :precondition (and
-            (moving ?m) (not (topositive ?m)) (carry ?b ?m) (> (at-robby ?m) 0) (>(position ?b)0)(<= (weight ?b) 50) (not (isfragile ?b))(> (battery ?m) 0) (not (free ?m))
-            )
-        :effect (and
-            (decrease (at-robby ?m) (* #t (velocity ?m))) (decrease (position ?b) (* #t (velocity ?m)))
-        )
-    )
-    (:process backto_loader_by_two
-        :parameters (?m1 - mover ?m2 - mover ?b - ball)
-        :precondition (and
-            (> (battery ?m1) 0)
-            (> (battery ?m2) 0)
-            (not (equal ?m1 ?m2))
-            (moving ?m1) (not (topositive ?m1)) (carry ?b ?m1) (> (at-robby ?m1) 0) 
-            (moving ?m2) (not (topositive ?m2)) (carry ?b ?m2) (> (at-robby ?m2) 0)
-            (> (position ?b) 0)
-            (not (free ?m1))
-            (not (free ?m2))
+            (> (battery ?m) 0)
+            (moving ?m) (not (topositive ?m)) 
+            (carry ?b ?m) 
+            (> (at-robby ?m) 0) 
+            (>(position ?b)0) 
+            (not (free ?m))
         )
         :effect (and
-            (decrease (at-robby ?m1) (* #t (velocity ?m1))) (decrease (at-robby ?m2) (* #t (velocity ?m2)))
-            (decrease (position ?b) (* #t (velocity ?m1)))
+            (decrease (at-robby ?m) (* #t (velocity ?m)))
         )
     )
 
-    (:event stop_handover
+    (:action stop_handover
         :parameters (?m - mover ?b - ball ?l - loader)
         :precondition (and
-            (<= (at-robby ?m) 0) (<= (position ?b) 0) (moving ?m) (not (topositive ?m)) (carry ?b ?m) (not (busyloading ?l ?b)) (<= (weight ?b) 50) (not (isfragile ?b))
+            (<= (at-robby ?m) 0) (moving ?m) (not (topositive ?m)) (carry ?b ?m) (not (busyloading ?l ?b)) (<= (weight ?b) 50) (not (isfragile ?b))
             (or 
                 (and (= (belong ?b) 0) ) ; (not (currentgroupset)) can be added, it's correct but may reduce parallelism 
                 (and (> (belong ?b) 0) (= (belong ?b) (currentgroup)))
@@ -220,13 +208,14 @@
             (assign (at-robby ?m) 0) (assign (position ?b) 0)
             (assign (velocity ?m) (max_vel ?m))
             (not (freeloader ?l))
+
         )
     )
-    (:event stop_handover_by_two
+    (:action stop_handover_by_two
         :parameters (?m1 - mover ?m2 - mover ?b - ball ?l - loader)
         :precondition (and
             (not (equal ?m1 ?m2))
-            (<= (at-robby ?m1) 0) (<= (position ?b) 0) (moving ?m1) (not (topositive ?m1)) (carry ?b ?m1)
+            (<= (at-robby ?m1) 0) (moving ?m1) (not (topositive ?m1)) (carry ?b ?m1)
             (<= (at-robby ?m2) 0) (moving ?m2) (not (topositive ?m2)) (carry ?b ?m2) (or (not (ischeap ?l)) (<= (weight ?b) 50))
             (not (busyloading ?l ?b))
             (or 
@@ -243,6 +232,7 @@
             (assign (velocity ?m2) (max_vel ?m2))
             (assign (x) 100)
             (not (freeloader ?l))
+
         )
     )
     (:process load
@@ -263,7 +253,7 @@
         )
         :effect (and 
             (freeloader ?l)
-            (assign (loadertimer ?l) 0) (not (busyloading ?l ?b)) (isloaded ?b)
+            (assign (loadertimer ?l) 0) (not (busyloading ?l ?b)) (isloaded ?b) 
         )
     )
        
