@@ -5,7 +5,7 @@
         mover1 mover2 - mover
         ball1 ball2 ball3 ball4 ball5 ball6 - ball
         loader1 loader2 - loader
-        A B - group
+        A B C - group
     )
 
     (:init
@@ -28,6 +28,8 @@
         
         (= (velocity mover1) 10)
         (= (velocity mover2) 10)
+
+        (not(coeff_set))
         
         ; (= (batterytimer) 0)
         
@@ -50,20 +52,20 @@
         (at_company ball5)
         (at_company ball6)
         (= (position ball1) 20)
-        (= (position ball2) 20)
+        (= (position ball2) 30)
         (= (position ball3) 10)
         (= (position ball4) 20)
         (= (position ball5) 30)
-        (= (position ball6) 40)
-        (= (weight ball1) 80)
-        (= (weight ball2) 20)
-        (= (weight ball3) 60)
-        (= (weight ball4) 20)
+        (= (position ball6) 10)
+        (= (weight ball1) 30)
+        (= (weight ball2) 60)
+        (= (weight ball3) 10)
+        (= (weight ball4) 70)
         (= (weight ball5) 30)
-        (= (weight ball6) 50)
+        (= (weight ball6) 20)
         (not (isfragile ball1))
         (not (isfragile ball2))
-        (not (isfragile ball3))
+        (isfragile ball3)
         (not (isfragile ball4))
         (not (isfragile ball5))
         (not (isfragile ball6))
@@ -72,14 +74,17 @@
         (= (belong ball3) 2)
         (= (belong ball4) 2)
         (= (belong ball5) 2)
-        (= (belong ball6) 0)
+        (= (belong ball6) 3)
         (= (x) 100)
         (group A)
         (group B)
+        (group C)
         (= (numofgroup A) 1)
         (= (numofgroup B) 2)
+        (= (numofgroup C) 3)
         (= (elementspergroup A) 2)
         (= (elementspergroup B) 3)
+        (= (elementspergroup C) 1)
 
         (not (currentgroupset))
         (= (currentgroup) 0)
@@ -91,7 +96,7 @@
         (= (loadertimer loader2) 0)
         (not (busyloading loader2)) 
         (not (ischeap loader2))
-        (not (ischeap loader1))
+        (ischeap loader1)
 
         (freeloader loader1)
         (freeloader loader2)
@@ -108,5 +113,7 @@
             (isloaded ball6)
         )
     )
+
+    ; (:metric minimize (total-time))
 
 )
