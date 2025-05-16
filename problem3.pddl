@@ -28,8 +28,8 @@
         
         (= (velocity mover1) 10)
         (= (velocity mover2) 10)
-        
-        ; (= (batterytimer) 0)
+
+        (not(coeff_set))
         
         (ball ball1)
         (ball ball2)
@@ -52,7 +52,7 @@
         (= (weight ball3) 60)
         (= (weight ball4) 30)
         (not (isfragile ball1))
-        (not (isfragile ball2))
+        (isfragile ball2)
         (not (isfragile ball3))
         (not (isfragile ball4))
         (= (belong ball1) 1)
@@ -63,18 +63,19 @@
         (group A)
         (= (numofgroup A) 1)
         (= (elementspergroup A) 3)
-
+        
         (not (currentgroupset))
         (= (currentgroup) 0)
 
         (loader loader1)
-        (= (loadertimer loader1) 0)
-        (not (busyloading loader1)) 
         (loader loader2)
+        (= (loadertimer loader1) 0)
         (= (loadertimer loader2) 0)
+        (not (busyloading loader1)) 
         (not (busyloading loader2)) 
         (not (ischeap loader2))
-        (not (ischeap loader1))
+        (ischeap loader1)
+
         (freeloader loader1)
         (freeloader loader2)
 
@@ -88,5 +89,7 @@
             (isloaded ball4)
         )
     )
+
+    ; (:metric minimize (total-time))
 
 )
