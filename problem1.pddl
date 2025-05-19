@@ -3,7 +3,7 @@
 
     (:objects
         mover1 mover2 - mover
-        ball1 ball2 ball3 - ball
+        crate1 crate2 crate3 - crate
         loader1 loader2 - loader
         A - group
     )
@@ -15,8 +15,8 @@
         (free mover2)
         (equal mover1 mover1)
         (equal mover2 mover2)
-        (= (at-robby mover1) 0)  
-        (= (at-robby mover2) 0)  
+        (= (rob_position mover1) 0)  
+        (= (rob_position mover2) 0)  
         (not (moving mover1))
         (not (moving mover2))
         (= (battery mover1) 20)
@@ -31,27 +31,27 @@
 
         (not(coeff_set))
         
-        (ball ball1)
-        (ball ball2)
-        (ball ball3)
-        (not (isloaded ball1))
-        (not (isloaded ball2))
-        (not (isloaded ball3))
-        (at_company ball1)
-        (at_company ball2)
-        (at_company ball3)
-        (= (position ball1) 10)
-        (= (position ball2) 20)
-        (= (position ball3) 20)
-        (= (weight ball1) 70)
-        (= (weight ball2) 20)
-        (= (weight ball3) 20)
-        (not (isfragile ball1))
-        (isfragile ball2)
-        (not (isfragile ball3))
-        (= (belong ball1) 0)
-        (= (belong ball2) 1)
-        (= (belong ball3) 1)
+        (crate crate1)
+        (crate crate2)
+        (crate crate3)
+        (not (isloaded crate1))
+        (not (isloaded crate2))
+        (not (isloaded crate3))
+        (at_company crate1)
+        (at_company crate2)
+        (at_company crate3)
+        (= (position crate1) 10)
+        (= (position crate2) 20)
+        (= (position crate3) 20)
+        (= (weight crate1) 70)
+        (= (weight crate2) 20)
+        (= (weight crate3) 20)
+        (not (isfragile crate1))
+        (isfragile crate2)
+        (not (isfragile crate3))
+        (= (belong crate1) 0)
+        (= (belong crate2) 1)
+        (= (belong crate3) 1)
         (= (x) 100)
         (group A)
         (= (numofgroup A) 1)
@@ -77,9 +77,9 @@
 
     (:goal
         (and 
-            (isloaded ball1)
-            (isloaded ball2)
-            (isloaded ball3)
+            (isloaded crate1)
+            (isloaded crate2)
+            (isloaded crate3)
         )
     )
 
