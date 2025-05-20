@@ -60,7 +60,6 @@
         (= (belong crate3) 1)
         (= (belong crate4) 0)
         (= (x) 100)
-        (group A)
         (= (numofgroup A) 1)
         (= (elementspergroup A) 3)
         

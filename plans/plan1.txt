@@ -1,0 +1,90 @@
+Domain parsed
+Problem parsed
+Grounding..
+Light Validation Completed
+Simplification..
+(Pre Simplification) - |A|+|P|+|E|: 129
+(After Easy Simplification) - |A|+|P|+|E|: 64
+(After AIBR):59
+(Pre Simplification) - |A|+|P|+|E|: 129
+(After Easy Simplification) - |A|+|P|+|E|: 63
+(After AIBR):59
+Grounding and Simplification finished
+|A|:30
+|P|:15
+|E|:14
+Size(X):13
+Size(F):27
+Delta time heuristic model:1.0
+Delta time planning model:1.0
+Delta time search-execution model:1.0
+Delta time validation model:1
+Setting horizon to:NaN
+Running WA-STAR
+Reachable actions and processes: |A U P U E|:59
+h(n = s_0)=136.0
+f(n) = 136.0 (Expanded Nodes: 0, Evaluated States: 0, Time: 0.006)
+f(n) = 138.0 (Expanded Nodes: 4, Evaluated States: 6, Time: 0.022)
+f(n) = 145.0 (Expanded Nodes: 10, Evaluated States: 16, Time: 0.034)
+f(n) = 147.0 (Expanded Nodes: 16, Evaluated States: 23, Time: 0.045)
+f(n) = 149.0 (Expanded Nodes: 20, Evaluated States: 29, Time: 0.05)
+f(n) = 154.0 (Expanded Nodes: 26, Evaluated States: 41, Time: 0.061)
+f(n) = 159.0 (Expanded Nodes: 35, Evaluated States: 61, Time: 0.079)
+f(n) = 166.0 (Expanded Nodes: 37, Evaluated States: 63, Time: 0.08)
+Starting Validation
+(Pre Simplification) - |A|+|P|+|E|: 129
+(After Easy Simplification) - |A|+|P|+|E|: 63
+(After AIBR):59
+Epsilon set to be:0.0
+Resolution for validation:1.0
+(Pddl+ semantics) Plan is valid:true
+Problem Solved
+0.00000: (start_forward mover1 )
+0.00000: (start_forward mover2 )
+(0.00000,1.00000)------>waiting
+1.00000: (stop_at_crate mover2 crate1 )
+1.00000: (stop_at_crate mover1 crate1 )
+1.00000: (pickup_by_two mover2 mover1 crate1 )
+1.00000: (coeff_changer_heavy mover2 mover1 crate1 )
+(1.00000,8.00000)------>waiting
+8.00000: (stop_handover_by_two mover1 mover2 crate1 loader2 )
+8.00000: (start_forward mover2 )
+8.00000: (charging_battery mover1 )
+(8.00000,10.00000)------>waiting
+10.00000: (stop_at_crate mover2 crate2 )
+10.00000: (pickup_per_gruppo mover2 crate3 A )
+(10.00000,11.00000)------>waiting
+11.00000: (start_forward mover1 )
+(11.00000,12.00000)------>waiting
+12.00000: (doneload crate1 loader2 )
+(12.00000,13.00000)------>waiting
+13.00000: (stop_at_crate mover1 crate2 )
+(13.00000,14.00000)------>waiting
+14.00000: (stop_handover mover2 crate3 loader1 )
+14.00000: (start_forward mover2 )
+(14.00000,16.00000)------>waiting
+16.00000: (stop_at_crate mover2 crate2 )
+16.00000: (pickup_by_two_per_gruppo mover1 mover2 crate2 A )
+16.00000: (switch_group A )
+16.00000: (coeff_changer_light mover1 mover2 crate2 )
+(16.00000,18.00000)------>waiting
+18.00000: (doneload crate3 loader1 )
+(18.00000,19.00000)------>waiting
+19.00000: (stop_handover_by_two mover1 mover2 crate2 loader1 )
+19.00000: (start_forward mover1 )
+19.00000: (start_forward mover2 )
+(19.00000,25.00000)------>waiting
+25.00000: (doneload crate2 loader1 )
+
+Plan-Length:50
+Duration:25.0
+Metric (Plan):0.0
+Metric (Search):43.0
+Planning Time:614
+Heuristic Time:395
+Search Time:425
+Expanded Nodes:475
+States Evaluated:711
+Fixed constraint violations during search (zero-crossing):0
+Number of Dead-Ends detected:135
+Number of Duplicates detected:233

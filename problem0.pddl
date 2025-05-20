@@ -45,7 +45,6 @@
         (not (isfragile crate2))
         (= (belong crate1) 0)
         (= (belong crate2) 1)
-        (= (x) 100)
         (group A)
         (= (numofgroup A) 1)
         

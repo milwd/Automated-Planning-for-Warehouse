@@ -59,7 +59,6 @@
         (= (belong crate2) 1)
         (= (belong crate3) 2)
         (= (belong crate4) 2)
-        (= (x) 100)
         (group A)
         (group B)
         (= (numofgroup A) 1)

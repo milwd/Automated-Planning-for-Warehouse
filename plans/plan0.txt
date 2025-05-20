@@ -1,0 +1,76 @@
+Domain parsed
+Problem parsed
+Grounding..
+Light Validation Completed
+Simplification..
+(Pre Simplification) - |A|+|P|+|E|: 89
+(After Easy Simplification) - |A|+|P|+|E|: 48
+(After AIBR):43
+(Pre Simplification) - |A|+|P|+|E|: 89
+(After Easy Simplification) - |A|+|P|+|E|: 47
+(After AIBR):43
+Grounding and Simplification finished
+|A|:22
+|P|:11
+|E|:10
+Size(X):12
+Size(F):21
+Delta time heuristic model:1.0
+Delta time planning model:1.0
+Delta time search-execution model:1.0
+Delta time validation model:1
+Setting horizon to:NaN
+Running WA-STAR
+Reachable actions and processes: |A U P U E|:43
+h(n = s_0)=105.0
+f(n) = 105.0 (Expanded Nodes: 0, Evaluated States: 0, Time: 0.009)
+f(n) = 108.0 (Expanded Nodes: 4, Evaluated States: 6, Time: 0.019)
+f(n) = 114.0 (Expanded Nodes: 10, Evaluated States: 16, Time: 0.036)
+Starting Validation
+(Pre Simplification) - |A|+|P|+|E|: 89
+(After Easy Simplification) - |A|+|P|+|E|: 47
+(After AIBR):43
+Epsilon set to be:0.0
+Resolution for validation:1.0
+(Pddl+ semantics) Plan is valid:true
+Problem Solved
+0.00000: (start_forward mover2 )
+(0.00000,1.00000)------>waiting
+1.00000: (start_forward mover1 )
+1.00000: (stop_at_crate mover2 crate1 )
+(1.00000,2.00000)------>waiting
+2.00000: (stop_at_crate mover1 crate1 )
+2.00000: (pickup_by_two mover2 mover1 crate1 )
+2.00000: (coeff_changer_heavy mover2 mover1 crate1 )
+(2.00000,9.00000)------>waiting
+9.00000: (stop_handover_by_two mover1 mover2 crate1 loader2 )
+9.00000: (start_forward mover2 )
+9.00000: (charging_battery mover1 )
+(9.00000,11.00000)------>waiting
+11.00000: (stop_at_crate mover2 crate2 )
+11.00000: (pickup_per_gruppo mover2 crate2 A )
+11.00000: (switch_group A )
+(11.00000,12.00000)------>waiting
+12.00000: (start_forward mover1 )
+(12.00000,13.00000)------>waiting
+13.00000: (doneload crate1 loader2 )
+(13.00000,14.00000)------>waiting
+14.00000: (stop_at_crate mover1 crate2 )
+(14.00000,15.00000)------>waiting
+15.00000: (stop_handover mover2 crate2 loader1 )
+15.00000: (start_forward mover2 )
+(15.00000,19.00000)------>waiting
+19.00000: (doneload crate2 loader1 )
+
+Plan-Length:37
+Duration:19.0
+Metric (Plan):0.0
+Metric (Search):32.0
+Planning Time:376
+Heuristic Time:149
+Search Time:174
+Expanded Nodes:109
+States Evaluated:168
+Fixed constraint violations during search (zero-crossing):0
+Number of Dead-Ends detected:0
+Number of Duplicates detected:26

@@ -1,0 +1,84 @@
+Domain parsed
+Problem parsed
+Grounding..
+Light Validation Completed
+Simplification..
+(Pre Simplification) - |A|+|P|+|E|: 169
+(After Easy Simplification) - |A|+|P|+|E|: 80
+(After AIBR):67
+(Pre Simplification) - |A|+|P|+|E|: 169
+(After Easy Simplification) - |A|+|P|+|E|: 79
+(After AIBR):67
+Grounding and Simplification finished
+|A|:34
+|P|:17
+|E|:16
+Size(X):14
+Size(F):31
+Delta time heuristic model:1.0
+Delta time planning model:1.0
+Delta time search-execution model:1.0
+Delta time validation model:1
+Setting horizon to:NaN
+Running WA-STAR
+Reachable actions and processes: |A U P U E|:67
+h(n = s_0)=150.0
+f(n) = 150.0 (Expanded Nodes: 0, Evaluated States: 0, Time: 0.014)
+f(n) = 153.0 (Expanded Nodes: 125, Evaluated States: 165, Time: 0.249)
+f(n) = 160.0 (Expanded Nodes: 319, Evaluated States: 454, Time: 0.426)
+f(n) = 161.0 (Expanded Nodes: 739, Evaluated States: 1058, Time: 0.723)
+f(n) = 162.0 (Expanded Nodes: 1207, Evaluated States: 1678, Time: 0.944)
+f(n) = 163.0 (Expanded Nodes: 1225, Evaluated States: 1696, Time: 0.955)
+f(n) = 164.0 (Expanded Nodes: 1236, Evaluated States: 1722, Time: 0.96)
+f(n) = 165.0 (Expanded Nodes: 1243, Evaluated States: 1727, Time: 0.961)
+f(n) = 167.0 (Expanded Nodes: 1263, Evaluated States: 1757, Time: 0.971)
+f(n) = 168.0 (Expanded Nodes: 1268, Evaluated States: 1759, Time: 0.971)
+f(n) = 169.0 (Expanded Nodes: 1283, Evaluated States: 1784, Time: 0.979)
+f(n) = 170.0 (Expanded Nodes: 1288, Evaluated States: 1785, Time: 0.98)
+f(n) = 171.0 (Expanded Nodes: 1322, Evaluated States: 1825, Time: 0.993)
+f(n) = 172.0 (Expanded Nodes: 1328, Evaluated States: 1829, Time: 0.997)
+f(n) = 173.0 (Expanded Nodes: 1355, Evaluated States: 1853, Time: 1.004)
+f(n) = 174.0 (Expanded Nodes: 1369, Evaluated States: 1871, Time: 1.01)
+f(n) = 175.0 (Expanded Nodes: 1377, Evaluated States: 1879, Time: 1.013)
+f(n) = 176.0 (Expanded Nodes: 1390, Evaluated States: 1889, Time: 1.014)
+f(n) = 177.0 (Expanded Nodes: 1395, Evaluated States: 1897, Time: 1.016)
+f(n) = 178.0 (Expanded Nodes: 1415, Evaluated States: 1925, Time: 1.025)
+f(n) = 179.0 (Expanded Nodes: 1421, Evaluated States: 1933, Time: 1.027)
+f(n) = 180.0 (Expanded Nodes: 1445, Evaluated States: 1951, Time: 1.033)
+f(n) = 181.0 (Expanded Nodes: 1451, Evaluated States: 1959, Time: 1.036)
+f(n) = 182.0 (Expanded Nodes: 3065, Evaluated States: 4021, Time: 1.658)
+f(n) = 183.0 (Expanded Nodes: 3073, Evaluated States: 4021, Time: 1.658)
+f(n) = 184.0 (Expanded Nodes: 3206, Evaluated States: 4195, Time: 1.712)
+f(n) = 185.0 (Expanded Nodes: 3567, Evaluated States: 4663, Time: 1.848)
+f(n) = 186.0 (Expanded Nodes: 3634, Evaluated States: 4728, Time: 1.872)
+f(n) = 187.0 (Expanded Nodes: 3684, Evaluated States: 4775, Time: 1.892)
+f(n) = 188.0 (Expanded Nodes: 3887, Evaluated States: 5039, Time: 1.966)
+f(n) = 189.0 (Expanded Nodes: 3917, Evaluated States: 5068, Time: 1.974)
+f(n) = 190.0 (Expanded Nodes: 3927, Evaluated States: 5080, Time: 1.977)
+f(n) = 191.0 (Expanded Nodes: 3935, Evaluated States: 5096, Time: 1.979)
+f(n) = 192.0 (Expanded Nodes: 3940, Evaluated States: 5103, Time: 1.981)
+f(n) = 193.0 (Expanded Nodes: 3967, Evaluated States: 5132, Time: 1.99)
+f(n) = 194.0 (Expanded Nodes: 3974, Evaluated States: 5137, Time: 1.991)
+f(n) = 195.0 (Expanded Nodes: 3978, Evaluated States: 5137, Time: 1.991)
+f(n) = 196.0 (Expanded Nodes: 3982, Evaluated States: 5139, Time: 1.992)
+f(n) = 197.0 (Expanded Nodes: 4496, Evaluated States: 5784, Time: 2.179)
+f(n) = 198.0 (Expanded Nodes: 4503, Evaluated States: 5788, Time: 2.18)
+f(n) = 199.0 (Expanded Nodes: 4527, Evaluated States: 5805, Time: 2.186)
+f(n) = 201.0 (Expanded Nodes: 4534, Evaluated States: 5807, Time: 2.187)
+f(n) = 204.0 (Expanded Nodes: 4542, Evaluated States: 5811, Time: 2.189)
+f(n) = 207.0 (Expanded Nodes: 4546, Evaluated States: 5815, Time: 2.19)
+f(n) = 210.0 (Expanded Nodes: 4552, Evaluated States: 5823, Time: 2.193)
+f(n) = 214.0 (Expanded Nodes: 4554, Evaluated States: 5825, Time: 2.193)
+f(n) = 218.0 (Expanded Nodes: 4577, Evaluated States: 5848, Time: 2.202)
+f(n) = 234.0 (Expanded Nodes: 4578, Evaluated States: 5848, Time: 2.202)
+Starting Validation
+Problem unsolvable
+Metric (Search):0.0
+Planning Time:2432
+Heuristic Time:2087
+Search Time:0
+Expanded Nodes:4579
+States Evaluated:5848
+Fixed constraint violations during search (zero-crossing):0
+Number of Dead-Ends detected:1171
+Number of Duplicates detected:2776
