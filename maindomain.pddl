@@ -222,6 +222,7 @@
                 (and (= (belong ?b) 0) ) ; (not (currentgroupset)) can be added, it's correct but may reduce parallelism 
                 (and (> (belong ?b) 0) (= (belong ?b) (currentgroup)))
             )
+            (freeloader ?l)
         )
         :effect (and
             (not (moving ?m)) (topositive ?m) (not (carry ?b ?m)) (busyloading ?l ?b) (free ?m)
@@ -242,6 +243,7 @@
                 (and (= (belong ?b) 0) ) ; (not (currentgroupset)) can be added, it's correct but may reduce parallelism 
                 (and (> (belong ?b) 0) (= (belong ?b) (currentgroup)))
             )
+            (freeloader ?l)
         )
         :effect (and
             (not (moving ?m1)) (topositive ?m1) (not (carry ?b ?m1)) (free ?m1) 

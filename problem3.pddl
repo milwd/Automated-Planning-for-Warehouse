@@ -70,8 +70,8 @@
         (loader loader2)
         (= (loadertimer loader1) 0)
         (= (loadertimer loader2) 0)
-        (not (busyloading loader1)) 
-        (not (busyloading loader2)) 
+        (freeloader loader1)
+        (freeloader loader2)
         (not (ischeap loader2))
         (ischeap loader1)
 
