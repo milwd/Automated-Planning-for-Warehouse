@@ -19,7 +19,6 @@ def calc_state0(state, weird=True):
     movers = ['mover1', 'mover2']
 
     h = 30 * sum([int (not (state[x][2])) for x in crates]) + \
-        1 * sum([int (not (state[x][1])) for x in movers]) + \
         0.1 * sum([int (not (state[x][2])) * int (not (weird)) for x in movers]) + \
         1 * sum([int(state[x][0]) * int(not bool(state[x][1])) for x in movers])
     p = 0
