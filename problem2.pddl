@@ -79,9 +79,6 @@
         (not (ischeap loader2))
         (ischeap loader1)
 
-        (freeloader loader1)
-        (freeloader loader2)
-
     )
 
     (:goal
